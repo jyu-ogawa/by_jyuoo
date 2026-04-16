@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>by_jyuuo — Design / Art</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="portfolio-styles.css" />
+</head>
+<body>
+<div class="portfolio-body" id="app">
+
+  <!-- ── LEFT SIDEBAR ─────────────────────────────────── -->
+  <aside class="left">
+    <div class="topbar" style="margin-top:-3px">
+      <div class="topbar-path"><span>~/by_jyuuo</span></div>
+      <button class="theme-btn" id="themeBtn">[ dark ]</button>
+    </div>
+    <div class="hero">
+      <div class="prompt">
+        <span class="prompt-symbol">$</span>
+        <span class="prompt-cmd">whoami</span>
+      </div>
+      <h1 class="hero-name">ju_ogawa</h1>
+      <p class="hero-title">MULTIMEDIA CREATIVE · STUDENT</p>
+      <p class="hero-bio">
+        Exploring Computer Engineering, Design, and Architecture.
+        Always looking to draw new connections. THIS WEBSITE IS
+        STILL UNDER CONSTRUCTION!<span class="cursor"></span>
+      </p>
+    </div>
+    <section>
+      <div class="sec-hd"><span class="sec-lbl">./contact</span></div>
+      <div class="contact-tree">
+        <div class="tree-item"><span class="tree-branch">│</span></div>
+        <div class="tree-item">
+          <span class="tree-branch">├──</span>
+          <a href="https://www.instagram.com/by_jyuuo/" target="_blank" class="tree-link">instagram/by_jyuuo</a>
+        </div>
+        <div class="tree-item"><span class="tree-branch">│</span></div>
+        <div class="tree-item">
+          <span class="tree-branch">├──</span>
+          <a href="https://www.linkedin.com/in/juogawa/" target="_blank" class="tree-link">linkedin/juogawa</a>
+        </div>
+        <div class="tree-item"><span class="tree-branch">│</span></div>
+        <div class="tree-item">
+          <span class="tree-branch">└──</span>
+          <a href="mailto:juliauogawa@gmail.com" class="tree-link">juliauogawa@gmail.com</a>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div><span class="status-dot"></span>available</div>
+      <div>updated 2025-03</div>
+    </footer>
+  </aside>
+
+  <!-- ── RIGHT PANEL ───────────────────────────────────── -->
+  <main class="right">
+    <div class="right-topbar">
+      <div class="tabs-group">
+        <a href="index.html"        class="right-tab tab-wide"        ><span class="tab-text">[Homepage]</span></a>
+        <a href="design.html"       class="right-tab tab-wide active" ><span class="tab-text">[Design/Art]</span></a>
+        <a href="photography.html"  class="right-tab"                 ><span class="tab-text">[Photography]</span></a>
+        <a href="csee.html"         class="right-tab"                 ><span class="tab-text">[CS/EE]</span></a>
+        <a href="about.html"        class="right-tab"                 ><span class="tab-text">[About]</span></a>
+      </div>
+    </div>
+
+    <div class="tab-content">
+      <div class="page-content">
+        <div class="design-wrap">
+
+          <!-- ── PROJECT 1: ILAS ──────────────────────── -->
+          <div class="proj-card">
+            <div class="proj-cmd">
+              <span class="dollar">$</span>
+              <span class="cmd">head ilas.columbia.edu</span>
+            </div>
+            <div class="proj-row">
+              <div class="carousel-outer">
+                <div class="carousel-box" id="c1">
+                  <div class="carousel-track">
+                    <div class="carousel-slide"><div class="img-ph ph-moss">[ ILAS cover ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-olive">[ ILAS 2 ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-graf">[ ILAS 3 ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-navy">[ ILAS 4 ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-slate">[ ILAS 5 ]</div></div>
+                  </div>
+                  <button class="carousel-arrow carousel-prev" onclick="prev('c1')">&#8249;</button>
+                  <button class="carousel-arrow carousel-next" onclick="next('c1')">&#8250;</button>
+                </div>
+              </div>
+              <div class="proj-meta">
+                <div class="ascii-logo">
+░▀█▀░█░░░█▀█░█▀▀
+░░█░░█░░░█▀█░▀▀█
+░▀▀▀░▀▀▀░▀░▀░▀▀▀</div>
+                <div class="proj-tags">
+                  <span class="proj-tag">#social_media</span>
+                  <span class="proj-tag">#branding</span>
+                </div>
+              </div>
+              <div class="proj-desc">
+                <p>The Institute of Latin American Studies (Columbia University). Julia manages communication and marketing, especially through social media and the <a href="https://ilas.columbia.edu/" target="_blank" rel="noopener noreferrer">website</a>. Responsible for the design of informational flyers and the implementation of updating ILAS' branding.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── PROJECT 2: ARCHITECTURE ──────────────── -->
+          <div class="proj-card">
+            <div class="proj-cmd">
+              <span class="dollar">$</span>
+              <span class="cmd">import arch.3dm</span>
+            </div>
+            <div class="proj-row">
+              <div class="carousel-outer">
+                <div class="carousel-box" id="c2">
+                  <div class="carousel-track">
+                    <div class="carousel-slide"><div class="img-ph ph-ecru dark-txt">[ arch 1 ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-sand dark-txt">[ arch 2 ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-slate">[ arch 3 ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-char">[ arch 4 ]</div></div>
+                  </div>
+                  <button class="carousel-arrow carousel-prev" onclick="prev('c2')">&#8249;</button>
+                  <button class="carousel-arrow carousel-next" onclick="next('c2')">&#8250;</button>
+                </div>
+              </div>
+              <div class="proj-meta">
+                <div class="ascii-logo" style="font-size:8px;line-height:12px">
+░█▀█░█▀▄░█▀▀░█░█░▀█▀░▀█▀░█▀▀░█▀▀░▀█▀░█░█░█▀▄░█▀▀
+░█▀█░█▀▄░█░░░█▀█░░█░░░█░░█▀▀░█░░░░█░░█░█░█▀▄░█▀▀
+░▀░▀░▀░▀░▀▀▀░▀░▀░▀▀▀░░▀░░▀▀▀░▀▀▀░░▀░░▀▀▀░▀░▀░▀▀▀</div>
+                <div class="proj-tags">
+                  <span class="proj-tag">#diagrams</span>
+                  <span class="proj-tag">#models</span>
+                </div>
+              </div>
+              <div class="proj-desc">
+                <p>Work created for ARCH1020: ARCHITECTURAL DESIGN &amp; VISUAL CULTURE. Based on MASP, and designing an intervening display case.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── PROJECT 3: BRS ────────────────────────── -->
+          <div class="proj-card">
+            <div class="proj-cmd">
+              <span class="dollar">$</span>
+              <span class="cmd">head brazilian_society.brs</span>
+            </div>
+            <div class="proj-row">
+              <div class="carousel-outer">
+                <div class="carousel-box" id="c3">
+                  <div class="carousel-track">
+                    <div class="carousel-slide"><div class="img-ph ph-navy">[ BRS 1 ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-ink">[ BRS 2 ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-graf">[ BRS 3 ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-slate">[ BRS 4 ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-moss">[ BRS 5 ]</div></div>
+                  </div>
+                  <button class="carousel-arrow carousel-prev" onclick="prev('c3')">&#8249;</button>
+                  <button class="carousel-arrow carousel-next" onclick="next('c3')">&#8250;</button>
+                </div>
+              </div>
+              <div class="proj-meta">
+                <div class="ascii-logo">
+░█▀▄░█▀▄░█▀▀
+░█▀▄░█▀▄░▀▀█
+░▀▀░░▀░▀░▀▀▀</div>
+                <div class="proj-tags">
+                  <span class="proj-tag">#social_media</span>
+                  <span class="proj-tag">#flyers</span>
+                </div>
+              </div>
+              <div class="proj-desc">
+                <p>The Brazilian Society at Columbia University is the Brazilian undergraduate student group, for which Julia is secretary and is responsible for graphic design.</p>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /design-wrap -->
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="img-note" id="imgNote">
+  ℹ Images are placeholders — replace <code>.img-ph</code> divs with <code>&lt;img src="..."&gt;</code> tags.
+  <button onclick="document.getElementById('imgNote').remove()">✕</button>
+</div>
+
+<script>
+  /* ── THEME ───────────────────────────────────────────── */
+  const btn = document.getElementById('themeBtn');
+  applyTheme(localStorage.getItem('ju-theme') || 'light');
+  btn.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    localStorage.setItem('ju-theme', next);
+  });
+  function applyTheme(t) {
+    document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+    btn.textContent = t === 'dark' ? '[ light ]' : '[ dark ]';
+  }
+
+  /* ── CAROUSELS ───────────────────────────────────────── */
+  const state = {};
+
+  function init(id) {
+    if (state[id]) return state[id];
+    const slides = document.getElementById(id).querySelectorAll('.carousel-slide');
+    state[id] = { cur: 0, total: slides.length };
+    return state[id];
+  }
+
+  function render(id) {
+    const s = state[id];
+    document.getElementById(id).querySelector('.carousel-track').style.transform =
+      `translateX(-${s.cur * 205}px)`;
+  }
+
+  function prev(id) { const s = init(id); s.cur = (s.cur - 1 + s.total) % s.total; render(id); }
+  function next(id) { const s = init(id); s.cur = (s.cur + 1) % s.total; render(id); }
+
+  ['c1','c2','c3'].forEach(init);
+</script>
+</body>
+</html>

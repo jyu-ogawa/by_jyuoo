@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>by_jyuuo — CS / EE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="portfolio-styles.css" />
+</head>
+<body>
+<div class="portfolio-body" id="app">
+
+  <!-- ── LEFT SIDEBAR ─────────────────────────────────── -->
+  <aside class="left">
+    <div class="topbar" style="margin-top:-3px">
+      <div class="topbar-path"><span>~/by_jyuuo</span></div>
+      <button class="theme-btn" id="themeBtn">[ dark ]</button>
+    </div>
+    <div class="hero">
+      <div class="prompt">
+        <span class="prompt-symbol">$</span>
+        <span class="prompt-cmd">whoami</span>
+      </div>
+      <h1 class="hero-name">ju_ogawa</h1>
+      <p class="hero-title">MULTIMEDIA CREATIVE · STUDENT</p>
+      <p class="hero-bio">
+        Exploring Computer Engineering, Design, and Architecture.
+        Always looking to draw new connections. THIS WEBSITE IS
+        STILL UNDER CONSTRUCTION!<span class="cursor"></span>
+      </p>
+    </div>
+    <section>
+      <div class="sec-hd"><span class="sec-lbl">./contact</span></div>
+      <div class="contact-tree">
+        <div class="tree-item"><span class="tree-branch">│</span></div>
+        <div class="tree-item">
+          <span class="tree-branch">├──</span>
+          <a href="https://www.instagram.com/by_jyuuo/" target="_blank" class="tree-link">instagram/by_jyuuo</a>
+        </div>
+        <div class="tree-item"><span class="tree-branch">│</span></div>
+        <div class="tree-item">
+          <span class="tree-branch">├──</span>
+          <a href="https://www.linkedin.com/in/juogawa/" target="_blank" class="tree-link">linkedin/juogawa</a>
+        </div>
+        <div class="tree-item"><span class="tree-branch">│</span></div>
+        <div class="tree-item">
+          <span class="tree-branch">└──</span>
+          <a href="mailto:juliauogawa@gmail.com" class="tree-link">juliauogawa@gmail.com</a>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div><span class="status-dot"></span>available</div>
+      <div>updated 2025-03</div>
+    </footer>
+  </aside>
+
+  <!-- ── RIGHT PANEL ───────────────────────────────────── -->
+  <main class="right">
+    <div class="right-topbar">
+      <div class="tabs-group">
+        <a href="index.html"        class="right-tab tab-wide"        ><span class="tab-text">[Homepage]</span></a>
+        <a href="design.html"       class="right-tab tab-wide"        ><span class="tab-text">[Design/Art]</span></a>
+        <a href="photography.html"  class="right-tab"                 ><span class="tab-text">[Photography]</span></a>
+        <a href="csee.html"         class="right-tab active"          ><span class="tab-text">[CS/EE]</span></a>
+        <a href="about.html"        class="right-tab"                 ><span class="tab-text">[About]</span></a>
+      </div>
+    </div>
+
+    <div class="tab-content">
+      <div class="page-content">
+        <div class="csee-wrap">
+          <div class="csee-inner">
+
+            <div class="csee-prompt">
+              <div class="cmd-row">
+                <span class="cmd-dollar">$</span>
+                <span class="cmd-text">ls ./engineering_projects</span>
+              </div>
+            </div>
+
+            <div id="csee-list">
+
+              <div>
+                <div class="csee-file" onclick="toggle(0)">
+                  <span class="csee-perm">-rwxr--r--</span>
+                  <span class="csee-name">adc_dac_circuit</span>
+                </div>
+                <div class="csee-desc" id="desc-0">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla</p>
+                </div>
+              </div>
+
+              <div>
+                <div class="csee-file" onclick="toggle(1)">
+                  <span class="csee-perm">-rwxr--r--</span>
+                  <span class="csee-name">555_timer</span>
+                </div>
+                <div class="csee-desc" id="desc-1">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla</p>
+                </div>
+              </div>
+
+              <div>
+                <div class="csee-file" onclick="toggle(2)">
+                  <span class="csee-perm">-rwxr--r--</span>
+                  <span class="csee-name">counter_circuit</span>
+                </div>
+                <div class="csee-desc" id="desc-2">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  /* ── THEME ───────────────────────────────────────────── */
+  const btn = document.getElementById('themeBtn');
+  applyTheme(localStorage.getItem('ju-theme') || 'light');
+  btn.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next); localStorage.setItem('ju-theme', next);
+  });
+  function applyTheme(t) {
+    document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+    btn.textContent = t === 'dark' ? '[ light ]' : '[ dark ]';
+  }
+
+  /* ── ACCORDION ───────────────────────────────────────── */
+  let open = null;
+  function toggle(idx) {
+    if (open !== null) document.getElementById('desc-' + open).classList.remove('open');
+    open = open === idx ? null : idx;
+    if (open !== null) document.getElementById('desc-' + open).classList.add('open');
+  }
+</script>
+</body>
+</html>
