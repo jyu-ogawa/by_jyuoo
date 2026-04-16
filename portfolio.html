@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>by_jyuuo — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    a { text-decoration: none; }
+
+    ::selection { background: var(--sel); color: var(--fg); }
+    html { font-size: 13px; }
+
+    /* ── TOKENS ────────────────────────────────────────── */
+    :root {
+      --bg:      #ffffff;
+      --bg2:     #ffc943;
+      --bg3:     #3f8c78;
+      --fg:      #008f64;
+      --fg2:     #426887;
+      --fg3:     #9aaea0;
+      --accent:  #008f64;
+      --accent2: #226fad;
+      --border:  #426887;
+      --cursor:  #008f64;
+      --sel:     rgba(0, 143, 100, 0.15);
+      --left-w:  303px;
+    }
+    [data-theme="dark"] {
+      --bg:      #060621;
+      --bg2:     #ffc943;
+      --bg3:     #3f8c78;
+      --fg:      #ffffff;
+      --fg2:     #426887;
+      --fg3:     #40724f;
+      --accent:  #008f64;
+      --accent2: #a0c4e5;
+      --border:  #426887;
+      --cursor:  #008f64;
+      --sel:     rgba(0, 143, 100, 0.15);
+    }
+
+    /* ── LAYOUT ────────────────────────────────────────── */
+    .portfolio-body {
+      font-family: "IBM Plex Mono", monospace;
+      background: var(--bg);
+      color: var(--fg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+      transition: background 0.2s, color 0.2s;
+    }
+    @media (min-width: 768px) {
+      .portfolio-body { height: 100vh; overflow: hidden; flex-direction: row; }
+    }
+
+    /* ── LEFT PANEL ─────────────────────────────────────── */
+    .left {
+      width: 100%; height: auto;
+      overflow-y: visible;
+      border-bottom: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      padding: 20px; flex-shrink: 0;
+      scrollbar-width: none;
+    }
+    .left::-webkit-scrollbar { display: none; }
+    @media (min-width: 768px) {
+      .left {
+        width: var(--left-w); max-width: 303px; min-width: 260px;
+        height: 100vh; overflow-y: auto;
+        border-right: 1px solid var(--border);
+        border-bottom: none;
+        padding: 24px 20px 32px;
+      }
+    }
+
+    .topbar {
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 4px; margin-bottom: 28px; flex-shrink: 0;
+    }
+    .topbar-path { color: var(--fg2); font-size: 0.75rem; letter-spacing: 0.05em; }
+    .topbar-path span { color: var(--accent); }
+    .theme-btn {
+      background: var(--bg); color: #426887;
+      font-family: inherit; font-size: 0.65rem;
+      padding: 3px 8px; cursor: pointer; border: none;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      transition: color 0.15s, background 0.15s;
+    }
+    .theme-btn:hover { color: #a0c4e5; background: #060621; }
+    [data-theme="dark"] .theme-btn { background: #060621; color: #426887; }
+    [data-theme="dark"] .theme-btn:hover { background: #ffffff; color: #426887; }
+
+    .hero { margin-bottom: 32px; flex-shrink: 0; }
+    .prompt { display: flex; align-items: baseline; gap: 6px; margin-bottom: 4px; }
+    .prompt-symbol { color: var(--accent); font-size: 0.9rem; user-select: none; }
+    .prompt-cmd    { color: var(--accent2); font-size: 0.9rem; }
+    .hero-name {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 700;
+      line-height: 1; letter-spacing: -0.02em; margin-bottom: 3px; color: var(--accent);
+    }
+    .hero-title {
+      color: var(--accent2); font-size: 0.7rem; letter-spacing: 0.12em;
+      text-transform: uppercase; margin-bottom: 14px; font-weight: 300;
+    }
+    .hero-bio { color: var(--fg2); line-height: 1.7; font-size: 0.8rem; }
+    .cursor {
+      display: inline-block; width: 8px; height: 1em;
+      background: var(--cursor); vertical-align: text-bottom;
+      animation: blink 1.1s step-end infinite; margin-left: 1px;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    section { margin-bottom: 28px; }
+    .sec-hd { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .sec-lbl { font-size: 0.80rem; letter-spacing: 0.2em; color: var(--accent); font-weight: 500; }
+
+    .contact-tree { display: flex; flex-direction: column; line-height: 1; }
+    .tree-item { display: flex; align-items: center; gap: 8px; padding: 0; line-height: 1; }
+    .tree-branch { color: var(--fg3); font-size: 0.75rem; user-select: none; flex-shrink: 0; }
+    .tree-link {
+      color: var(--fg2); text-decoration: none; font-size: 0.75rem;
+      letter-spacing: 0.03em; transition: all 0.15s;
+      padding: 2px 6px; margin: -2px -6px;
+    }
+    .tree-link:hover { background: var(--bg2); color: var(--accent); }
+
+    footer {
+      margin-top: auto; padding-top: 16px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between;
+      color: var(--fg3); font-size: 0.65rem; letter-spacing: 0.07em; flex-shrink: 0;
+    }
+    .status-dot {
+      display: inline-block; width: 5px; height: 5px;
+      border-radius: 50%; background: var(--accent);
+      margin-right: 5px; vertical-align: middle;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    /* ── RIGHT PANEL ────────────────────────────────────── */
+    .right {
+      flex: 1; display: flex; flex-direction: column;
+      min-height: 100vh; height: auto; overflow-y: visible;
+      scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+      position: relative;
+    }
+    @media (min-width: 768px) { .right { height: 100vh; min-height: auto; overflow-y: auto; } }
+    .right::-webkit-scrollbar { width: 4px; }
+    .right::-webkit-scrollbar-thumb { background: var(--border); }
+
+    .right-topbar {
+      position: sticky; top: 0; left: 0; right: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: center;
+      padding: 17px 20px; background: var(--bg);
+    }
+    @media (min-width: 768px) {
+      .right-topbar { justify-content: flex-start; padding-top: 23px; padding-bottom: 10px; }
+    }
+
+    .tabs-group {
+      display: grid; grid-template-columns: repeat(6, 1fr);
+      align-items: center; gap: 8px; width: 100%;
+    }
+    @media (min-width: 768px) {
+      .tabs-group { display: flex; flex-wrap: nowrap; justify-content: flex-start; gap: 0; width: auto; }
+    }
+
+    .right-tab {
+      padding: 0 20px; font-size: 0.65rem; letter-spacing: 0.15em;
+      text-transform: capitalize; color: var(--accent2); cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center;
+      grid-column: span 2; background: none; border: none; font-family: inherit;
+    }
+    .right-tab:first-child, .right-tab:nth-child(2) { grid-column: span 3; }
+    @media (min-width: 768px) { .right-tab { grid-column: unset; } }
+
+    .tab-text { transition: background 0.15s, color 0.15s, padding 0.15s; }
+    .right-tab:hover .tab-text { background: var(--bg2); color: var(--accent2); padding: 0 8px; }
+    .right-tab.active .tab-text {
+      color: var(--accent2); text-decoration: underline;
+      text-decoration-color: var(--bg2); text-decoration-thickness: 14%;
+      text-underline-offset: 3px;
+    }
+    .right-tab.active:hover .tab-text { background: var(--bg2); color: #226fad; text-decoration: none; padding: 0 8px; }
+
+    /* ── TAB CONTENT ────────────────────────────────────── */
+    .tab-content { flex: 1; display: flex; min-height: 400px; min-width: 100%; }
+    @media (min-width: 768px) { .tab-content { min-height: 700px; min-width: 300px; } }
+
+    .content-section { display: none; width: 100%; height: 100%; min-height: 400px; }
+    @media (min-width: 768px) { .content-section { min-height: 600px; } }
+    .content-section.visible { display: block; }
+
+    /* ── HOMEPAGE — draggable windows ───────────────────── */
+    .windows-container { position: relative; min-height: 1400px; width: 100%; }
+    .win {
+      position: absolute; background: var(--bg);
+      border: 1px solid #426887; cursor: grab;
+      user-select: none;
+    }
+    .win.dragging { cursor: grabbing; }
+    .win-inner {
+      display: flex; flex-direction: column; gap: 3px;
+      align-items: flex-end; overflow: hidden;
+      padding: 7px 8px; width: 100%; height: 100%;
+    }
+    .win-close {
+      position: relative; width: 9px; height: 9px; flex-shrink: 0;
+    }
+    .win-close::before, .win-close::after {
+      content: ""; position: absolute; top: 50%; left: 50%;
+      width: 11.364px; height: 1.364px; background: #426887;
+    }
+    .win-close::before { transform: translate(-50%,-50%) rotate(45deg); }
+    .win-close::after  { transform: translate(-50%,-50%) rotate(-45deg); }
+    .win-img {
+      flex: 1; min-height: 0; min-width: 0;
+      width: 100%; position: relative; overflow: hidden;
+    }
+    .win-img img, .win-img .img-ph {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    }
+    .img-ph {
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.6rem; letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ── DESIGN PAGE ────────────────────────────────────── */
+    .design-wrap { padding: 0 20px; display: flex; flex-direction: column; gap: 10px; }
+    .proj-card {
+      width: 100%; padding-bottom: 10px;
+      transition: background-color 0.2s;
+    }
+    .proj-card:hover { background-color: var(--bg2); }
+    .proj-cmd { display: flex; gap: 6px; align-items: baseline; margin-bottom: 10px; }
+    .proj-cmd .dollar { color: var(--accent); font-size: 11.7px; line-height: 17.55px; }
+    .proj-cmd .cmd    { color: var(--accent2); font-size: 11.7px; line-height: 17.55px; }
+    .proj-row { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
+
+    /* Carousel */
+    .carousel-outer {
+      width: 257px; height: 259px; display: flex; align-items: center;
+      justify-content: center; padding-left: 12px; flex-shrink: 0;
+    }
+    .carousel-box { width: 205px; height: 274px; position: relative; overflow: hidden; }
+    .carousel-track-wrap { display: flex; transition: transform 0.5s ease; height: 100%; }
+    .carousel-slide { flex-shrink: 0; width: 205px; height: 274px; }
+    .carousel-slide img, .carousel-slide .img-ph {
+      width: 205px; height: 274px; object-fit: cover; display: block;
+    }
+    .carousel-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(0,0,0,0.45); color: #fff; border: none;
+      width: 28px; height: 36px; cursor: pointer; z-index: 5;
+      font-family: "IBM Plex Mono", monospace; font-size: 14px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .carousel-arrow:hover { background: rgba(0,0,0,0.7); }
+    .carousel-prev { left: 0; }
+    .carousel-next { right: 0; }
+
+    .proj-meta { display: flex; flex-direction: column; gap: 15px; min-width: 126px; }
+    .ascii-logo {
+      font-family: "IBM Plex Mono", monospace;
+      font-weight: bold; font-size: 13px; line-height: 15px;
+      color: var(--accent); white-space: pre; letter-spacing: 0;
+    }
+    .proj-tags { display: flex; gap: 5px; flex-wrap: wrap; align-items: center; }
+    .proj-tag {
+      font-family: "IBM Plex Mono", monospace; font-size: 11px;
+      line-height: 23.562px; color: var(--fg2);
+      letter-spacing: 1.5708px; text-transform: lowercase;
+    }
+    .proj-desc { flex: 1; min-width: 300px; }
+    .proj-desc p {
+      font-family: "IBM Plex Mono", monospace; font-size: 14px;
+      line-height: 29.656px; color: var(--fg); margin: 25px;
+      padding-right: 15px;
+    }
+    .proj-desc a { color: var(--accent); text-decoration: underline; }
+
+    /* ── PHOTOGRAPHY PAGE ───────────────────────────────── */
+    .photo-grid {
+      display: grid; grid-template-columns: 1fr;
+      gap: 33px; padding: 10px 20px;
+    }
+    @media (min-width: 768px) {
+      .photo-grid { grid-template-columns: 1fr 1fr; padding: 10px 40px; }
+    }
+    .photo-cell { width: 100%; aspect-ratio: 4/3; overflow: hidden; }
+    .photo-cell img, .photo-cell .img-ph { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── CS/EE PAGE ─────────────────────────────────────── */
+    .csee-wrap {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: flex-start; min-height: 600px; padding: 24px 20px;
+    }
+    @media (min-width: 768px) { .csee-wrap { justify-content: center; } }
+    .csee-inner { width: 100%; max-width: 615px; }
+    .csee-prompt { margin-bottom: 24px; }
+    .csee-file {
+      display: flex; gap: 14px; align-items: center;
+      height: 35px; cursor: pointer;
+      transition: background 0.15s;
+    }
+    .csee-file:hover { background: var(--bg2); }
+    .csee-perm, .csee-name {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 15.992px; line-height: 34.254px;
+      color: #426887; letter-spacing: 2.2836px;
+    }
+    .csee-desc {
+      display: none; padding-left: 130px; padding-bottom: 12px;
+    }
+    .csee-desc p {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 15.992px; line-height: 34.254px;
+      color: #426887; letter-spacing: 2.2836px; max-width: 597px;
+    }
+    .csee-desc.open { display: flex; align-items: center; }
+
+    /* ── ABOUT PAGE ─────────────────────────────────────── */
+    .about-wrap {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; min-height: 600px; padding: 24px 48px;
+    }
+    .about-inner { width: 100%; max-width: 615px; display: flex; flex-direction: column; gap: 16px; }
+    .about-prompt { margin-bottom: 24px; }
+    .about-p {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11.05px; line-height: 19.89px; color: var(--accent2);
+    }
+    .about-p a { color: var(--accent2); text-decoration: underline; }
+    .about-p .underline { text-decoration: underline; }
+
+    /* Shared prompt style */
+    .cmd-row { display: flex; gap: 6px; align-items: flex-start; }
+    .cmd-dollar { font-family: "IBM Plex Mono",monospace; font-size: 11.7px; line-height: 17.55px; color: #008f64; }
+    .cmd-text   { font-family: "IBM Plex Mono",monospace; font-size: 11.7px; line-height: 17.55px; color: var(--accent2); }
+
+    /* Placeholder colors */
+    .ph-ink   { background: #002739; }
+    .ph-slate { background: #4c5667; }
+    .ph-moss  { background: #034c4c; }
+    .ph-olive { background: #3f8c78; }
+    .ph-navy  { background: #002739; }
+    .ph-graf  { background: #2a3f47; }
+    .ph-rust  { background: #5a4a40; }
+    .ph-ecru  { background: #e8eef1; }
+    .ph-char  { background: #1a2a33; }
+    .ph-sand  { background: #d1d9dd; }
+
+    /* Note banner */
+    .img-note {
+      position: fixed; bottom: 12px; right: 12px;
+      background: #060621; color: #a0c4e5;
+      font-family: "IBM Plex Mono", monospace; font-size: 0.65rem;
+      padding: 8px 12px; z-index: 9999; max-width: 300px; line-height: 1.6;
+      border: 1px solid #426887;
+    }
+    .img-note button {
+      background: none; border: none; color: #6cfff7;
+      cursor: pointer; font-family: inherit; font-size: inherit;
+      padding: 0; margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="portfolio-body" id="app">
+
+  <!-- ── LEFT SIDEBAR ──────────────────────────────────── -->
+  <aside class="left">
+    <div class="topbar" style="margin-top:-3px">
+      <div class="topbar-path"><span>~/by_jyuuo</span></div>
+      <button class="theme-btn" id="themeBtn">[ dark ]</button>
+    </div>
+
+    <div class="hero">
+      <div class="prompt">
+        <span class="prompt-symbol">$</span>
+        <span class="prompt-cmd">whoami</span>
+      </div>
+      <h1 class="hero-name">ju_ogawa</h1>
+      <p class="hero-title">MULTIMEDIA CREATIVE · STUDENT</p>
+      <p class="hero-bio">
+        Exploring Computer Engineering, Design, and Architecture.
+        Always looking to draw new connections. THIS WEBSITE IS
+        STILL UNDER CONSTRUCTION!<span class="cursor"></span>
+      </p>
+    </div>
+
+    <section>
+      <div class="sec-hd"><span class="sec-lbl">./contact</span></div>
+      <div class="contact-tree">
+        <div class="tree-item"><span class="tree-branch">│</span></div>
+        <div class="tree-item">
+          <span class="tree-branch">├──</span>
+          <a href="https://www.instagram.com/by_jyuuo/" target="_blank" class="tree-link">instagram/by_jyuuo</a>
+        </div>
+        <div class="tree-item"><span class="tree-branch">│</span></div>
+        <div class="tree-item">
+          <span class="tree-branch">├──</span>
+          <a href="https://www.linkedin.com/in/juogawa/" target="_blank" class="tree-link">linkedin/juogawa</a>
+        </div>
+        <div class="tree-item"><span class="tree-branch">│</span></div>
+        <div class="tree-item">
+          <span class="tree-branch">└──</span>
+          <a href="mailto:juliauogawa@gmail.com" class="tree-link">juliauogawa@gmail.com</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div><span class="status-dot"></span>available</div>
+      <div>updated 2025-03</div>
+    </footer>
+  </aside>
+
+  <!-- ── RIGHT PANEL ───────────────────────────────────── -->
+  <main class="right">
+    <div class="right-topbar">
+      <div class="tabs-group">
+        <button class="right-tab active" data-tab="home"><span class="tab-text">[Homepage]</span></button>
+        <button class="right-tab" data-tab="design"><span class="tab-text">[Design/Art]</span></button>
+        <button class="right-tab" data-tab="photography"><span class="tab-text">[Photography]</span></button>
+        <button class="right-tab" data-tab="csee"><span class="tab-text">[CS/EE]</span></button>
+        <button class="right-tab" data-tab="about"><span class="tab-text">[About]</span></button>
+      </div>
+    </div>
+
+    <div class="tab-content">
+
+      <!-- ── HOMEPAGE ──────────────────────────────────── -->
+      <div id="page-home" class="content-section visible">
+        <div class="windows-container" id="winContainer">
+
+          <div class="win" id="win-1" style="left:50px;top:37px;width:439px;height:306px;z-index:10">
+            <div class="win-inner">
+              <div class="win-close"></div>
+              <div class="win-img"><div class="img-ph ph-navy">[ kamakura pond ]</div></div>
+            </div>
+          </div>
+
+          <div class="win" id="win-2" style="left:36px;top:401px;width:277px;height:281px;z-index:10">
+            <div class="win-inner">
+              <div class="win-close"></div>
+              <div class="win-img"><div class="img-ph ph-moss">[ MASP ]</div></div>
+            </div>
+          </div>
+
+          <div class="win" id="win-3" style="left:284px;top:308px;width:254px;height:223px;z-index:10">
+            <div class="win-inner">
+              <div class="win-close"></div>
+              <div class="win-img"><div class="img-ph ph-slate">[ image ]</div></div>
+            </div>
+          </div>
+
+          <div class="win" id="win-4" style="left:550px;top:85px;width:220px;height:207px;z-index:10">
+            <div class="win-inner">
+              <div class="win-close"></div>
+              <div class="win-img"><div class="img-ph ph-ink">[ upcoming events ]</div></div>
+            </div>
+          </div>
+
+          <div class="win" id="win-5" style="left:606px;top:278px;width:224px;height:269px;z-index:10">
+            <div class="win-inner">
+              <div class="win-close"></div>
+              <div class="win-img"><div class="img-ph ph-olive">[ image ]</div></div>
+            </div>
+          </div>
+
+          <div class="win" id="win-6" style="left:950px;top:21px;width:224px;height:274px;z-index:10">
+            <div class="win-inner">
+              <div class="win-close"></div>
+              <div class="win-img"><div class="img-ph ph-graf">[ image ]</div></div>
+            </div>
+          </div>
+
+          <div class="win" id="win-7" style="left:881px;top:285px;width:335px;height:230px;z-index:10">
+            <div class="win-inner">
+              <div class="win-close"></div>
+              <div class="win-img"><div class="img-ph ph-char">[ image ]</div></div>
+            </div>
+          </div>
+
+          <div class="win" id="win-8" style="left:841px;top:534px;width:243px;height:234px;z-index:10">
+            <div class="win-inner">
+              <div class="win-close"></div>
+              <div class="win-img"><div class="img-ph ph-moss">[ kyoto entrance ]</div></div>
+            </div>
+          </div>
+
+          <div class="win" id="win-9" style="left:600px;top:700px;width:207px;height:297px;z-index:10">
+            <div class="win-inner">
+              <div class="win-close"></div>
+              <div class="win-img"><div class="img-ph ph-slate">[ baile funk ]</div></div>
+            </div>
+          </div>
+
+          <div class="win" id="win-10" style="left:428px;top:492px;width:325px;height:246px;z-index:10">
+            <div class="win-inner">
+              <div class="win-close"></div>
+              <div class="win-img"><div class="img-ph ph-navy">[ columbia ]</div></div>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /home -->
+
+      <!-- ── DESIGN/ART ─────────────────────────────────── -->
+      <div id="page-design" class="content-section">
+        <div class="design-wrap">
+
+          <!-- Project 1: ILAS -->
+          <div class="proj-card">
+            <div class="proj-cmd">
+              <span class="dollar">$</span>
+              <span class="cmd">head ilas.columbia.edu</span>
+            </div>
+            <div class="proj-row">
+              <div class="carousel-outer">
+                <div class="carousel-box" id="carousel-1">
+                  <div class="carousel-track-wrap">
+                    <div class="carousel-slide"><div class="img-ph ph-moss">[ ILAS cover ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-olive">[ ILAS 2 ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-graf">[ ILAS 3 ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-navy">[ ILAS 4 ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-slate">[ ILAS 5 ]</div></div>
+                  </div>
+                  <button class="carousel-arrow carousel-prev" onclick="carouselPrev('carousel-1')">&#8249;</button>
+                  <button class="carousel-arrow carousel-next" onclick="carouselNext('carousel-1')">&#8250;</button>
+                </div>
+              </div>
+              <div class="proj-meta">
+                <div class="ascii-logo">
+░▀█▀░█░░░█▀█░█▀▀
+░░█░░█░░░█▀█░▀▀█
+░▀▀▀░▀▀▀░▀░▀░▀▀▀</div>
+                <div class="proj-tags">
+                  <span class="proj-tag">#social_media</span>
+                  <span class="proj-tag">#branding</span>
+                </div>
+              </div>
+              <div class="proj-desc">
+                <p>The Institute of Latin American Studies (Columbia University). Julia manages communication and marketing, especially through social media and the <a href="https://ilas.columbia.edu/" target="_blank" rel="noopener noreferrer">website</a>. Responsible for the design of informational flyers and the implementation of updating ILAS' branding.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2: Architecture -->
+          <div class="proj-card">
+            <div class="proj-cmd">
+              <span class="dollar">$</span>
+              <span class="cmd">import arch.3dm</span>
+            </div>
+            <div class="proj-row">
+              <div class="carousel-outer">
+                <div class="carousel-box" id="carousel-2">
+                  <div class="carousel-track-wrap">
+                    <div class="carousel-slide"><div class="img-ph ph-ecru" style="color:#334">[ arch 1 ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-sand" style="color:#334">[ arch 2 ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-slate">[ arch 3 ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-char">[ arch 4 ]</div></div>
+                  </div>
+                  <button class="carousel-arrow carousel-prev" onclick="carouselPrev('carousel-2')">&#8249;</button>
+                  <button class="carousel-arrow carousel-next" onclick="carouselNext('carousel-2')">&#8250;</button>
+                </div>
+              </div>
+              <div class="proj-meta">
+                <div class="ascii-logo" style="font-size:9px;line-height:13px">
+░█▀█░█▀▄░█▀▀░█░█░▀█▀░▀█▀░█▀▀░█▀▀░▀█▀░█░█░█▀▄░█▀▀
+░█▀█░█▀▄░█░░░█▀█░░█░░░█░░█▀▀░█░░░░█░░█░█░█▀▄░█▀▀
+░▀░▀░▀░▀░▀▀▀░▀░▀░▀▀▀░░▀░░▀▀▀░▀▀▀░░▀░░▀▀▀░▀░▀░▀▀▀</div>
+                <div class="proj-tags">
+                  <span class="proj-tag">#diagrams</span>
+                  <span class="proj-tag">#models</span>
+                </div>
+              </div>
+              <div class="proj-desc">
+                <p>Work created for ARCH1020: ARCHITECTURAL DESIGN &amp; VISUAL CULTURE. Based on MASP, and designing an intervening display case.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3: BRS -->
+          <div class="proj-card">
+            <div class="proj-cmd">
+              <span class="dollar">$</span>
+              <span class="cmd">head brazilian_society.brs</span>
+            </div>
+            <div class="proj-row">
+              <div class="carousel-outer">
+                <div class="carousel-box" id="carousel-3">
+                  <div class="carousel-track-wrap">
+                    <div class="carousel-slide"><div class="img-ph ph-navy">[ BRS 1 ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-ink">[ BRS 2 ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-graf">[ BRS 3 ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-slate">[ BRS 4 ]</div></div>
+                    <div class="carousel-slide"><div class="img-ph ph-moss">[ BRS 5 ]</div></div>
+                  </div>
+                  <button class="carousel-arrow carousel-prev" onclick="carouselPrev('carousel-3')">&#8249;</button>
+                  <button class="carousel-arrow carousel-next" onclick="carouselNext('carousel-3')">&#8250;</button>
+                </div>
+              </div>
+              <div class="proj-meta">
+                <div class="ascii-logo">
+░█▀▄░█▀▄░█▀▀
+░█▀▄░█▀▄░▀▀█
+░▀▀░░▀░▀░▀▀▀</div>
+                <div class="proj-tags">
+                  <span class="proj-tag">#social_media</span>
+                  <span class="proj-tag">#flyers</span>
+                </div>
+              </div>
+              <div class="proj-desc">
+                <p>The Brazilian Society at Columbia University is the Brazilian undergraduate student group, for which Julia is secretary and is responsible for graphic design.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /design -->
+
+      <!-- ── PHOTOGRAPHY ────────────────────────────────── -->
+      <div id="page-photography" class="content-section">
+        <div class="photo-grid">
+          <div class="photo-cell"><div class="img-ph ph-navy">[ photo 01 ]</div></div>
+          <div class="photo-cell"><div class="img-ph ph-moss">[ photo 02 ]</div></div>
+          <div class="photo-cell"><div class="img-ph ph-slate">[ photo 03 ]</div></div>
+          <div class="photo-cell"><div class="img-ph ph-olive">[ photo 04 ]</div></div>
+          <div class="photo-cell"><div class="img-ph ph-graf">[ photo 05 ]</div></div>
+          <div class="photo-cell"><div class="img-ph ph-ink">[ photo 06 ]</div></div>
+          <div class="photo-cell"><div class="img-ph ph-char">[ photo 07 ]</div></div>
+          <div class="photo-cell"><div class="img-ph ph-rust">[ photo 08 ]</div></div>
+          <div class="photo-cell"><div class="img-ph ph-moss">[ photo 09 ]</div></div>
+          <div class="photo-cell"><div class="img-ph ph-navy">[ photo 10 ]</div></div>
+          <div class="photo-cell"><div class="img-ph ph-slate">[ photo 11 ]</div></div>
+          <div class="photo-cell"><div class="img-ph ph-graf">[ photo 12 ]</div></div>
+          <div class="photo-cell"><div class="img-ph ph-olive">[ photo 13 ]</div></div>
+          <div class="photo-cell"><div class="img-ph ph-ink">[ photo 14 ]</div></div>
+          <div class="photo-cell"><div class="img-ph ph-char">[ photo 15 ]</div></div>
+          <div class="photo-cell"><div class="img-ph ph-rust">[ photo 16 ]</div></div>
+          <div class="photo-cell"><div class="img-ph ph-moss">[ photo 17 ]</div></div>
+          <div class="photo-cell"><div class="img-ph ph-navy">[ photo 18 ]</div></div>
+        </div>
+      </div><!-- /photography -->
+
+      <!-- ── CS/EE ───────────────────────────────────────── -->
+      <div id="page-csee" class="content-section">
+        <div class="csee-wrap">
+          <div class="csee-inner">
+            <div class="csee-prompt">
+              <div class="cmd-row">
+                <span class="cmd-dollar">$</span>
+                <span class="cmd-text">ls ./engineering_projects</span>
+              </div>
+            </div>
+            <div id="csee-list">
+
+              <div>
+                <div class="csee-file" onclick="toggleCsee(0)">
+                  <span class="csee-perm">-rwxr--r--</span>
+                  <span class="csee-name">adc_dac_circuit</span>
+                </div>
+                <div class="csee-desc" id="csee-desc-0">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla</p>
+                </div>
+              </div>
+
+              <div>
+                <div class="csee-file" onclick="toggleCsee(1)">
+                  <span class="csee-perm">-rwxr--r--</span>
+                  <span class="csee-name">555_timer</span>
+                </div>
+                <div class="csee-desc" id="csee-desc-1">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla</p>
+                </div>
+              </div>
+
+              <div>
+                <div class="csee-file" onclick="toggleCsee(2)">
+                  <span class="csee-perm">-rwxr--r--</span>
+                  <span class="csee-name">counter_circuit</span>
+                </div>
+                <div class="csee-desc" id="csee-desc-2">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div><!-- /csee -->
+
+      <!-- ── ABOUT ───────────────────────────────────────── -->
+      <div id="page-about" class="content-section">
+        <div class="about-wrap">
+          <div class="about-prompt cmd-row" style="width:100%;max-width:615px;margin-bottom:24px">
+            <span class="cmd-dollar">$</span>
+            <span class="cmd-text">cat about.txt</span>
+          </div>
+          <div class="about-inner">
+            <p class="about-p">Born and raised in São Paulo (Brazil), Ju Ogawa (she/her) studies <span class="underline">Computer Engineering</span>, with a minor in <span class="underline">Architecture</span>, at Columbia University, New York (USA).</p>
+            <p class="about-p">She is interested in technology with an interdisciplinary mindset, applying her design skills and multicultural background to <a href="https://www.engineering.columbia.edu/about/mission-vision/engineering-humanity" target="_blank" rel="noopener noreferrer">engineer for Humanity</a>.</p>
+            <p class="about-p">Additionally, Julia enjoys photography, drawing, and baking.</p>
+            <p class="about-p">THIS WEBSITE IS STILL UNDER CONSTRUCTION!!</p>
+          </div>
+        </div>
+      </div><!-- /about -->
+
+    </div><!-- /tab-content -->
+  </main>
+</div><!-- /portfolio-body -->
+
+<!-- Notice about images -->
+<div class="img-note" id="imgNote">
+  ℹ Images replaced with placeholders — add your own &lt;img&gt; src attributes to swap them in.
+  <button onclick="document.getElementById('imgNote').remove()">✕</button>
+</div>
+
+<script>
+  /* ── THEME TOGGLE ─────────────────────────────────── */
+  const themeBtn = document.getElementById('themeBtn');
+  let dark = false;
+  themeBtn.addEventListener('click', () => {
+    dark = !dark;
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : '');
+    themeBtn.textContent = dark ? '[ light ]' : '[ dark ]';
+  });
+
+  /* ── TAB NAVIGATION ───────────────────────────────── */
+  const tabs = document.querySelectorAll('.right-tab');
+  const pages = document.querySelectorAll('.content-section');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      tabs.forEach(t => t.classList.remove('active'));
+      pages.forEach(p => p.classList.remove('visible'));
+      tab.classList.add('active');
+      document.getElementById('page-' + target).classList.add('visible');
+      // scroll right panel back to top on tab switch
+      document.querySelector('.right').scrollTop = 0;
+    });
+  });
+
+  /* ── DRAGGABLE WINDOWS ────────────────────────────── */
+  let maxZ = 20;
+
+  function bringToFront(el) {
+    el.style.zIndex = ++maxZ;
+  }
+
+  document.querySelectorAll('.win').forEach(win => {
+    let dragging = false, ox = 0, oy = 0;
+
+    win.addEventListener('mousedown', e => {
+      bringToFront(win);
+      if (e.target.closest('.win-img')) return; // don't drag from image area
+      dragging = true;
+      ox = e.clientX - win.offsetLeft;
+      oy = e.clientY - win.offsetTop;
+      win.classList.add('dragging');
+      e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      const parent = win.parentElement.getBoundingClientRect();
+      let x = e.clientX - ox;
+      let y = e.clientY - oy;
+      x = Math.max(0, Math.min(x, parent.width  - win.offsetWidth));
+      y = Math.max(0, Math.min(y, parent.height - win.offsetHeight));
+      win.style.left = x + 'px';
+      win.style.top  = y + 'px';
+    });
+
+    document.addEventListener('mouseup', () => {
+      dragging = false;
+      win.classList.remove('dragging');
+    });
+  });
+
+  /* ── CAROUSELS ────────────────────────────────────── */
+  const carouselState = {};
+
+  function getCarousel(id) {
+    if (!carouselState[id]) {
+      const box = document.getElementById(id);
+      const slides = box.querySelectorAll('.carousel-slide');
+      carouselState[id] = { current: 0, total: slides.length };
+    }
+    return carouselState[id];
+  }
+
+  function setCarouselPos(id) {
+    const state = carouselState[id];
+    const track = document.getElementById(id).querySelector('.carousel-track-wrap');
+    track.style.transform = `translateX(-${state.current * 205}px)`;
+  }
+
+  function carouselPrev(id) {
+    const s = getCarousel(id);
+    s.current = (s.current - 1 + s.total) % s.total;
+    setCarouselPos(id);
+  }
+
+  function carouselNext(id) {
+    const s = getCarousel(id);
+    s.current = (s.current + 1) % s.total;
+    setCarouselPos(id);
+  }
+
+  // Init all carousels
+  ['carousel-1','carousel-2','carousel-3'].forEach(id => getCarousel(id));
+
+  /* ── CS/EE ACCORDION ──────────────────────────────── */
+  let openCsee = null;
+
+  function toggleCsee(idx) {
+    const desc = document.getElementById('csee-desc-' + idx);
+    if (openCsee === idx) {
+      desc.classList.remove('open');
+      openCsee = null;
+    } else {
+      if (openCsee !== null) {
+        document.getElementById('csee-desc-' + openCsee).classList.remove('open');
+      }
+      desc.classList.add('open');
+      openCsee = idx;
+    }
+  }
+</script>
+</body>
+</html>
